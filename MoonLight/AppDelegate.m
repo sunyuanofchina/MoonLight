@@ -11,18 +11,42 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize tabBarController;
+@synthesize lightViewController;
 
 - (void)dealloc
 {
     [_window release];
+    [tabBarController release];
+    [lightViewController release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#if 1
+    NSData *dataTV = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://live.tv.sohu.com"]];
+    //NSData *dataUTF8 = [self GBK2Utf8:dataTV];
+    char *pdataTV = (char *)[dataTV bytes];
+    int len = strlen(pdataTV);
+    printf("len =%d,%s\n",len,pdataTV);
+    
+#endif
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    lightViewController =[[LightViewController alloc]init];
+#if 0
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:lightViewController, nil];
+    self.window.rootViewController = self.tabBarController;
+    [lightViewController release];
+#endif
+     self.window.rootViewController = lightViewController;
+   
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -41,6 +65,7 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    [lightViewController turnOffLed:YES];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -48,6 +73,11 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    if (lightViewController.isLightOn) {
+        [lightViewController turnOnLed:YES];
+    }
+    
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
