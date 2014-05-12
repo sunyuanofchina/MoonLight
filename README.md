@@ -1,7 +1,12 @@
 Flashlight
 =========
 
+需要在iPhone上面进行测试
+
 手电筒，一款简单的手电筒应用，支持多频率（1-10），应用比较简单，新手可以看得懂，如果有问题请及时联系我，以便修复。谢谢。
+
+
+The test is carried out on iPhone
 
 A flashlight, a simple flashlight application, support for multiple frequency (1-10).
 
