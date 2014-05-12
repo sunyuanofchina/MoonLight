@@ -122,9 +122,8 @@
     }  
      if (update) 
      {
-    [btnOnOff setImage:[UIImage imageNamed:@"BtnOff.png"] forState:UIControlStateNormal];
+         [btnOnOff setImage:[UIImage imageNamed:@"BtnOff.png"] forState:UIControlStateNormal];
      }
-    
 } 
 
 -(IBAction)onBtnOnOff:(id)sender
